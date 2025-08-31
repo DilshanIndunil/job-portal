@@ -1,4 +1,4 @@
-import { Company } from "../models/company.model";
+import { Company } from "../models/company.model.js";
 
 export const registerCompany = async (req , res) => {
     try {
@@ -14,7 +14,7 @@ export const registerCompany = async (req , res) => {
 
     company = await Company.create({
         name:companyName,
-        userID: req.id
+        userId: req.id
     })
 
     return res.status(200).json({
@@ -72,10 +72,10 @@ export const updateCompny = async (req, res) => {
         const file = req.file;
         // cloudinary implementation
     
-        const updateDate = {name, description, website, location};
+        const updateData = {name, description, website, location};
     
-        const company = await Company.findByIdAndUpdate(req.params.id, updateDate, {new:true});
-        if(!comapny){
+        const company = await Company.findByIdAndUpdate(req.params.id, updateData, {new:true});
+        if(!company){
             return res.status(404).json({message: "Company not found !", success:false})
         }
 
